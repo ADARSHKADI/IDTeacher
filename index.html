@@ -1,0 +1,2860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Teacher ID Card Registration</title>
+
+
+<!-- Bootstrap -->
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+
+<!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+rel="stylesheet">
+
+
+<!-- SweetAlert -->
+<script
+src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+</script>
+
+
+<!-- Cropper -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js">
+</script>
+
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+}
+
+body{
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eef4ff 0%,
+        #f8fbff 45%,
+        #edf7f5 100%
+    );
+
+    color:#1f2937;
+
+    overflow-x:hidden;
+}
+
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+.top-header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0d6efd,
+        #3159d8,
+        #5636c9
+    );
+
+    color:white;
+
+    padding:25px 15px 65px;
+
+    position:relative;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 35px rgba(13,110,253,.25);
+
+}
+
+
+.top-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:-1px;
+
+    height:55px;
+
+    background:white;
+
+    clip-path:
+    ellipse(70% 60% at 50% 100%);
+
+}
+
+
+.header-icon{
+
+    width:70px;
+    height:70px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+    rgba(255,255,255,.16);
+
+    border:
+    1px solid rgba(255,255,255,.35);
+
+    font-size:31px;
+
+    backdrop-filter:blur(8px);
+
+}
+
+
+.top-header h1{
+
+    margin:
+    14px 0 5px;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+
+.top-header p{
+
+    margin:0;
+
+    font-size:14px;
+
+    opacity:.92;
+
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.main-wrapper{
+
+    width:100%;
+
+    max-width:950px;
+
+    margin:-25px auto 40px;
+
+    padding:
+    0 15px;
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+
+.form-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:
+    0 18px 50px rgba(30,64,175,.12);
+
+    border:
+    1px solid rgba(255,255,255,.8);
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-section{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:13px 15px;
+
+    margin-bottom:25px;
+
+    border:1px solid #e7edf5;
+
+}
+
+
+.progress-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:8px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+.progress{
+
+    height:8px;
+
+    background:#e9eef5;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+.progress-bar{
+
+    width:0%;
+
+    border-radius:20px;
+
+    transition:
+    width .35s ease;
+
+    background:
+    linear-gradient(
+        90deg,
+        #0d6efd,
+        #5636c9
+    );
+
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:
+    25px 0 17px;
+
+    padding-bottom:10px;
+
+    border-bottom:
+    1px solid #edf0f5;
+
+}
+
+
+.section-icon{
+
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#edf4ff;
+
+    color:#0d6efd;
+
+}
+
+
+.section-title h3{
+
+    margin:0;
+
+    font-size:17px;
+
+    font-weight:700;
+
+}
+
+
+.section-title small{
+
+    display:block;
+
+    color:#8a94a6;
+
+    font-size:11px;
+
+    font-weight:400;
+
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+.form-label{
+
+    font-weight:600;
+
+    font-size:13px;
+
+    color:#374151;
+
+    margin-bottom:7px;
+
+}
+
+
+.required::after{
+
+    content:" *";
+
+    color:#dc3545;
+
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.form-control,
+.form-select{
+
+    min-height:46px;
+
+    border-radius:11px;
+
+    border:
+    1px solid #dce3ec;
+
+    font-size:14px;
+
+    padding:
+    10px 13px;
+
+    transition:
+    all .2s ease;
+
+    background:#fff;
+
+}
+
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:
+    0 0 0 4px rgba(13,110,253,.09);
+
+}
+
+
+textarea.form-control{
+
+    min-height:105px;
+
+    resize:vertical;
+
+}
+
+
+.uppercase{
+
+    text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   EMPLOYEE STATUS
+========================================================= */
+
+.employee-status{
+
+    display:block;
+
+    margin-top:6px;
+
+    min-height:18px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+.status-available{
+
+    color:#198754;
+
+}
+
+
+.status-exists{
+
+    color:#dc3545;
+
+}
+
+
+.status-checking{
+
+    color:#f59e0b;
+
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.input-icon{
+
+    position:relative;
+
+}
+
+
+.input-icon i{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#8b98aa;
+
+    z-index:2;
+
+}
+
+
+.input-icon .form-control,
+.input-icon .form-select{
+
+    padding-left:42px;
+
+}
+
+
+/* =========================================================
+   PHOTO AREA
+========================================================= */
+
+.photo-section{
+
+    background:
+    linear-gradient(
+        135deg,
+        #f8fbff,
+        #f5f8ff
+    );
+
+    border:
+    1px solid #e3ebf7;
+
+    border-radius:17px;
+
+    padding:18px;
+
+}
+
+
+.photo-preview{
+
+    width:150px;
+
+    height:200px;
+
+    margin:
+    10px auto 0;
+
+    border-radius:13px;
+
+    border:
+    2px dashed #9bb9ed;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+
+.photo-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:none;
+
+}
+
+
+.photo-placeholder{
+
+    text-align:center;
+
+    color:#91a0b5;
+
+    padding:15px;
+
+}
+
+
+.photo-placeholder i{
+
+    display:block;
+
+    font-size:35px;
+
+    margin-bottom:8px;
+
+}
+
+
+.photo-placeholder span{
+
+    font-size:12px;
+
+}
+
+
+/* =========================================================
+   ADDRESS COUNTER
+========================================================= */
+
+.address-counter{
+
+    text-align:right;
+
+    color:#8994a5;
+
+    font-size:11px;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================================================
+   SUBMIT AREA
+========================================================= */
+
+.submit-area{
+
+    margin-top:30px;
+
+    padding-top:20px;
+
+    border-top:
+    1px solid #edf0f5;
+
+    text-align:center;
+
+}
+
+
+#submitBtn{
+
+    min-width:250px;
+
+    min-height:50px;
+
+    border:none;
+
+    border-radius:13px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0d6efd,
+        #5636c9
+    );
+
+    box-shadow:
+    0 9px 25px rgba(13,110,253,.25);
+
+    transition:
+    all .2s ease;
+
+}
+
+
+#submitBtn:hover{
+
+    transform:
+    translateY(-2px);
+
+    box-shadow:
+    0 12px 30px rgba(13,110,253,.32);
+
+}
+
+
+#submitBtn:disabled{
+
+    opacity:.7;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+/* =========================================================
+   PHOTO CROP MODAL
+========================================================= */
+
+.crop-container{
+
+    width:100%;
+
+    max-height:500px;
+
+    overflow:hidden;
+
+    background:#111827;
+
+    border-radius:10px;
+
+}
+
+
+.crop-container img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-note{
+
+    text-align:center;
+
+    color:#8994a5;
+
+    font-size:11px;
+
+    margin-top:20px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:767px){
+
+    .top-header{
+
+        padding:
+        20px 12px 55px;
+
+    }
+
+
+    .header-icon{
+
+        width:58px;
+        height:58px;
+
+        font-size:25px;
+
+    }
+
+
+    .top-header h1{
+
+        font-size:21px;
+
+    }
+
+
+    .top-header p{
+
+        font-size:12px;
+
+    }
+
+
+    .main-wrapper{
+
+        padding:
+        0 9px;
+
+        margin-top:-20px;
+
+    }
+
+
+    .form-card{
+
+        padding:
+        18px 14px;
+
+        border-radius:17px;
+
+    }
+
+
+    .section-title{
+
+        margin-top:21px;
+
+    }
+
+
+    .photo-preview{
+
+        width:120px;
+
+        height:160px;
+
+    }
+
+
+    #submitBtn{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+}
+
+
+@media(max-width:380px){
+
+    .form-card{
+
+        padding:
+        15px 11px;
+
+    }
+
+
+    .top-header h1{
+
+        font-size:19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.btn-spinner{
+
+    width:18px;
+
+    height:18px;
+
+    border:
+    2px solid rgba(255,255,255,.45);
+
+    border-top-color:white;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    animation:
+    spin .7s linear infinite;
+
+    vertical-align:middle;
+
+}
+
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="top-header">
+
+    <div class="header-icon">
+
+        <i class="fa-solid fa-id-card"></i>
+
+    </div>
+
+    <h1>Teacher ID Card Registration</h1>
+
+    <p>
+        Please enter your details carefully
+    </p>
+
+</header>
+
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<div class="main-wrapper">
+
+<div class="form-card">
+
+
+<!-- =======================================================
+     PROGRESS
+======================================================= -->
+
+<div class="progress-section">
+
+    <div class="progress-top">
+
+        <span>
+            <i class="fa-solid fa-chart-line me-1"></i>
+            Form Completion
+        </span>
+
+        <span id="progressText">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress">
+
+        <div
+        id="progressBar"
+        class="progress-bar">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<form id="teacherForm">
+
+
+<!-- =======================================================
+     PERSONAL INFORMATION
+======================================================= -->
+
+<div class="section-title">
+
+    <div class="section-icon">
+
+        <i class="fa-solid fa-user"></i>
+
+    </div>
+
+    <div>
+
+        <h3>Personal Information</h3>
+
+        <small>
+            Teacher basic details
+        </small>
+
+    </div>
+
+</div>
+
+
+<div class="row g-3">
+
+
+<!-- Employee ID -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Employee ID
+
+    <span class="fw-normal text-muted">
+
+        (જ્ઞાન સહાયક અને માનદ વેતન કર્મચારીઓએ પોતાનો PAN Card નંબર લખવો.)
+
+    </span>
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-id-badge"></i>
+
+    <input
+        type="text"
+        id="employeeID"
+        class="form-control"
+        maxlength="12"
+        autocomplete="off"
+        required>
+
+</div>
+
+
+<span
+id="empStatus"
+class="employee-status">
+</span>
+
+</div>
+
+
+
+<!-- Full Name -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Full Name
+
+    <span class="fw-normal text-muted">
+        (અંગ્રેજીમાં)
+    </span>
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-user"></i>
+
+    <input
+        type="text"
+        id="fullName"
+        class="form-control uppercase"
+        autocomplete="name"
+        required>
+
+</div>
+
+</div>
+
+
+
+<!-- Designation -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Designation
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-user-tie"></i>
+
+    <select
+        id="designation"
+        class="form-select"
+        required>
+
+        <option value="">
+            Select Designation
+        </option>
+
+        <option>Principal</option>
+
+        <option>Vice Principal</option>
+
+        <option>Assistant Teacher</option>
+
+        <option>Teacher</option>
+
+        <option>Clerk</option>
+
+        <option>Peon</option>
+
+        <option>Lab Assistant</option>
+
+        <option>Librarian</option>
+
+        <option>Accountant</option>
+
+        <option>Other</option>
+
+    </select>
+
+</div>
+
+</div>
+
+
+
+<!-- Mobile -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Mobile Number
+
+    <span class="fw-normal text-muted">
+        (10 અંકોમાં)
+    </span>
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-mobile-screen-button"></i>
+
+    <input
+        type="text"
+        id="mobile"
+        class="form-control"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="10 Digit Mobile Number"
+        required>
+
+</div>
+
+</div>
+
+
+
+<!-- Blood Group -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Blood Group
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-droplet"></i>
+
+    <select
+        id="bloodGroup"
+        class="form-select"
+        required>
+
+        <option value="">
+            Select Blood Group
+        </option>
+
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+        <option>O+</option>
+        <option>O-</option>
+
+    </select>
+
+</div>
+
+</div>
+
+
+
+<!-- DOB -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Date of Birth
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-calendar-days"></i>
+
+    <input
+        type="text"
+        id="dob"
+        class="form-control"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="DD-MM-YYYY"
+        required>
+
+</div>
+
+</div>
+
+
+
+<!-- Joining Date -->
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Date of Joining
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-calendar-check"></i>
+
+    <input
+        type="text"
+        id="doj"
+        class="form-control"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="DD-MM-YYYY"
+        required>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =======================================================
+     ADDRESS
+======================================================= -->
+
+<div class="section-title">
+
+    <div class="section-icon">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+    </div>
+
+    <div>
+
+        <h3>Address</h3>
+
+        <small>
+            Current residential address
+        </small>
+
+    </div>
+
+</div>
+
+
+<label class="form-label required">
+
+    Address
+
+    <span class="fw-normal text-muted">
+        (હાલનુ પૂરું સરનામું)
+    </span>
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-house"></i>
+
+    <textarea
+        id="address"
+        class="form-control uppercase"
+        rows="3"
+        maxlength="250"
+        placeholder="Enter your complete address"
+        required></textarea>
+
+</div>
+
+
+<div class="address-counter">
+
+    <span id="addressCount">
+        0
+    </span>
+    /250
+
+</div>
+
+
+
+<!-- =======================================================
+     RETIREMENT
+======================================================= -->
+
+<div class="section-title">
+
+    <div class="section-icon">
+
+        <i class="fa-solid fa-calendar-xmark"></i>
+
+    </div>
+
+    <div>
+
+        <h3>Retirement Information</h3>
+
+        <small>
+            Retirement details
+        </small>
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Retire Date
+
+</label>
+
+
+<div class="input-icon">
+
+    <i class="fa-solid fa-calendar-xmark"></i>
+
+    <input
+        type="text"
+        id="retireDate"
+        class="form-control"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="DD-MM-YYYY"
+        required>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     PHOTO
+======================================================= -->
+
+<div class="section-title">
+
+    <div class="section-icon">
+
+        <i class="fa-solid fa-camera"></i>
+
+    </div>
+
+    <div>
+
+        <h3>Teacher Photo</h3>
+
+        <small>
+            Recent passport size photo
+        </small>
+
+    </div>
+
+</div>
+
+
+<div class="photo-section">
+
+<div class="row align-items-center g-4">
+
+
+<div class="col-md-6">
+
+<label class="form-label required">
+
+    Teacher Photo
+
+    <span class="fw-normal text-muted">
+
+        (તાજેતરનો પાસપોર્ટ સાઈઝ ફોટો)
+
+    </span>
+
+</label>
+
+
+<input
+    type="file"
+    id="photo"
+    class="form-control"
+    accept="image/*"
+    capture="environment">
+
+
+<div class="small text-muted mt-2">
+
+    <i class="fa-solid fa-circle-info me-1"></i>
+
+    Photo will be cropped to passport-size format.
+
+</div>
+
+</div>
+
+
+
+<div class="col-md-6">
+
+<div class="photo-preview">
+
+    <img
+        id="previewImage"
+        alt="Teacher Photo Preview">
+
+    <div
+        id="photoPlaceholder"
+        class="photo-placeholder">
+
+        <i class="fa-solid fa-image"></i>
+
+        <span>
+            Photo Preview
+        </span>
+
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     SUBMIT
+======================================================= -->
+
+<div class="submit-area">
+
+<button
+    type="submit"
+    id="submitBtn"
+    class="btn btn-primary">
+
+    <i class="fa-solid fa-cloud-arrow-up me-2"></i>
+
+    Save Registration
+
+</button>
+
+
+<div class="footer-note">
+
+    <i class="fa-solid fa-shield-halved me-1"></i>
+
+    Please verify all details before submitting.
+
+</div>
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     PHOTO CROP MODAL
+======================================================= -->
+
+<div
+class="modal fade"
+id="cropModal"
+tabindex="-1"
+aria-hidden="true">
+
+
+<div
+class="modal-dialog modal-lg modal-dialog-centered">
+
+
+<div class="modal-content">
+
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+    <i class="fa-solid fa-crop-simple me-2"></i>
+
+    Crop Teacher Photo
+
+</h5>
+
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+
+
+<div class="modal-body">
+
+<div class="crop-container">
+
+<img
+id="cropImage"
+alt="Crop Image">
+
+</div>
+
+</div>
+
+
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+    Cancel
+
+</button>
+
+
+<button
+type="button"
+id="cropBtn"
+class="btn btn-success">
+
+    <i class="fa-solid fa-check me-1"></i>
+
+    Crop & Use Photo
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Bootstrap JS -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+/* =========================================================
+   APPS SCRIPT URL
+========================================================= */
+
+/*
+   NEW CODE.GS DEPLOY KARNE KE BAAD
+   YAHAN NAYA /exec URL PASTE KARNA HAI.
+*/
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzGvdeYx--CZscFlI7JrpOlnaHtKUBEEIKBKPxR-XJJavtuw9vvD5Wy9YtrwkQR58OJ/exec";
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const form =
+document.getElementById("teacherForm");
+
+const employeeID =
+document.getElementById("employeeID");
+
+const fullName =
+document.getElementById("fullName");
+
+const designation =
+document.getElementById("designation");
+
+const mobile =
+document.getElementById("mobile");
+
+const bloodGroup =
+document.getElementById("bloodGroup");
+
+const dob =
+document.getElementById("dob");
+
+const doj =
+document.getElementById("doj");
+
+const address =
+document.getElementById("address");
+
+const retireDate =
+document.getElementById("retireDate");
+
+const photoInput =
+document.getElementById("photo");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+const progressBar =
+document.getElementById("progressBar");
+
+const progressText =
+document.getElementById("progressText");
+
+const addressCount =
+document.getElementById("addressCount");
+
+const empStatus =
+document.getElementById("empStatus");
+
+const previewImage =
+document.getElementById("previewImage");
+
+const photoPlaceholder =
+document.getElementById("photoPlaceholder");
+
+
+
+/* =========================================================
+   PHOTO VARIABLES
+========================================================= */
+
+let cropper = null;
+
+let cropModal = null;
+
+let photoBase64 = "";
+
+
+
+/* =========================================================
+   BOOTSTRAP CROP MODAL
+========================================================= */
+
+cropModal =
+new bootstrap.Modal(
+    document.getElementById("cropModal")
+);
+
+
+
+/* =========================================================
+   FULL NAME UPPERCASE
+========================================================= */
+
+fullName.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.toUpperCase();
+
+        updateProgress();
+
+    }
+);
+
+
+
+/* =========================================================
+   ADDRESS UPPERCASE
+========================================================= */
+
+address.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.toUpperCase();
+
+        addressCount.textContent =
+        this.value.length;
+
+        updateProgress();
+
+    }
+);
+
+
+
+/* =========================================================
+   MOBILE ONLY NUMBERS
+========================================================= */
+
+mobile.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.replace(/\D/g,"");
+
+        if(this.value.length > 10){
+
+            this.value =
+            this.value.substring(0,10);
+
+        }
+
+        updateProgress();
+
+    }
+);
+
+
+
+/* =========================================================
+   EMPLOYEE ID
+========================================================= */
+
+employeeID.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.trim();
+
+        empStatus.innerHTML = "";
+
+        updateProgress();
+
+    }
+);
+
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function autoDateFormat(input){
+
+    input.addEventListener(
+        "input",
+        function(){
+
+            let value =
+            this.value.replace(/\D/g,"");
+
+
+            if(value.length > 8){
+
+                value =
+                value.substring(0,8);
+
+            }
+
+
+            let result = "";
+
+
+            if(value.length >= 2){
+
+                result =
+                value.substring(0,2);
+
+            }
+
+            else{
+
+                result =
+                value;
+
+            }
+
+
+            if(value.length > 2){
+
+                result +=
+                "-" +
+                value.substring(2,4);
+
+            }
+
+
+            if(value.length > 4){
+
+                result +=
+                "-" +
+                value.substring(4,8);
+
+            }
+
+
+            this.value = result;
+
+            updateProgress();
+
+        }
+    );
+
+}
+
+
+autoDateFormat(dob);
+
+autoDateFormat(doj);
+
+autoDateFormat(retireDate);
+
+
+
+/* =========================================================
+   PHOTO SELECT
+========================================================= */
+
+photoInput.addEventListener(
+    "change",
+    function(event){
+
+        const file =
+        event.target.files[0];
+
+
+        if(!file){
+
+            return;
+
+        }
+
+
+        if(!file.type.startsWith("image/")){
+
+            Swal.fire({
+
+                icon:"error",
+
+                title:"Invalid File",
+
+                text:"Please select an image file."
+
+            });
+
+            photoInput.value="";
+
+            return;
+
+        }
+
+
+        const reader =
+        new FileReader();
+
+
+        reader.onload =
+        function(e){
+
+            document.getElementById(
+                "cropImage"
+            ).src = e.target.result;
+
+
+            cropModal.show();
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+
+/* =========================================================
+   START CROPPER
+========================================================= */
+
+document.getElementById(
+    "cropModal"
+).addEventListener(
+    "shown.bs.modal",
+    function(){
+
+        if(cropper){
+
+            cropper.destroy();
+
+        }
+
+
+        const image =
+        document.getElementById(
+            "cropImage"
+        );
+
+
+        cropper =
+        new Cropper(
+            image,
+            {
+
+                aspectRatio:3/4,
+
+                viewMode:1,
+
+                autoCropArea:1,
+
+                responsive:true,
+
+                background:false,
+
+                movable:true,
+
+                zoomable:true,
+
+                scalable:false,
+
+                rotatable:false
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   DESTROY CROPPER
+========================================================= */
+
+document.getElementById(
+    "cropModal"
+).addEventListener(
+    "hidden.bs.modal",
+    function(){
+
+        if(cropper){
+
+            cropper.destroy();
+
+            cropper=null;
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   CROP PHOTO
+========================================================= */
+
+document.getElementById(
+    "cropBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        if(!cropper){
+
+            Swal.fire({
+
+                icon:"warning",
+
+                title:"Photo Not Ready",
+
+                text:"Please select the photo again."
+
+            });
+
+            return;
+
+        }
+
+
+        const canvas =
+        cropper.getCroppedCanvas({
+
+            width:300,
+
+            height:400,
+
+            imageSmoothingEnabled:true,
+
+            imageSmoothingQuality:"high"
+
+        });
+
+
+        if(!canvas){
+
+            Swal.fire({
+
+                icon:"error",
+
+                title:"Crop Failed",
+
+                text:"Unable to crop the photo."
+
+            });
+
+            return;
+
+        }
+
+
+        photoBase64 =
+        canvas.toDataURL(
+            "image/jpeg",
+            0.90
+        );
+
+
+        previewImage.src =
+        photoBase64;
+
+
+        previewImage.style.display =
+        "block";
+
+
+        photoPlaceholder.style.display =
+        "none";
+
+
+        cropModal.hide();
+
+
+        updateProgress();
+
+    }
+);
+
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(){
+
+    let total = 10;
+
+    let filled = 0;
+
+
+    if(employeeID.value.trim() !== "")
+        filled++;
+
+
+    if(fullName.value.trim() !== "")
+        filled++;
+
+
+    if(designation.value !== "")
+        filled++;
+
+
+    if(mobile.value.length === 10)
+        filled++;
+
+
+    if(bloodGroup.value !== "")
+        filled++;
+
+
+    if(isValidDate(dob.value))
+        filled++;
+
+
+    if(isValidDate(doj.value))
+        filled++;
+
+
+    if(address.value.trim() !== "")
+        filled++;
+
+
+    if(isValidDate(retireDate.value))
+        filled++;
+
+
+    if(photoBase64 !== "")
+        filled++;
+
+
+    const percent =
+    Math.round(
+        (filled / total) * 100
+    );
+
+
+    progressBar.style.width =
+    percent + "%";
+
+
+    progressText.textContent =
+    percent + "%";
+
+}
+
+
+
+form.addEventListener(
+    "input",
+    updateProgress
+);
+
+
+form.addEventListener(
+    "change",
+    updateProgress
+);
+
+
+
+/* =========================================================
+   DATE VALIDATION
+========================================================= */
+
+function isValidDate(value){
+
+    if(!/^\d{2}-\d{2}-\d{4}$/.test(value)){
+
+        return false;
+
+    }
+
+
+    const parts =
+    value.split("-");
+
+
+    const day =
+    Number(parts[0]);
+
+    const month =
+    Number(parts[1]);
+
+    const year =
+    Number(parts[2]);
+
+
+    if(month < 1 || month > 12){
+
+        return false;
+
+    }
+
+
+    if(day < 1 || day > 31){
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =========================================================
+   EMPLOYEE ID LIVE CHECK
+========================================================= */
+
+employeeID.addEventListener(
+    "blur",
+    checkEmployeeID
+);
+
+
+async function checkEmployeeID(){
+
+    const id =
+    employeeID.value.trim();
+
+
+    if(id === ""){
+
+        empStatus.innerHTML = "";
+
+        return;
+
+    }
+
+
+    if(
+        SCRIPT_URL.includes(
+            "PASTE_NEW_SCRIPT_URL"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    empStatus.innerHTML =
+    '<span class="status-checking">' +
+    '<i class="fa-solid fa-spinner fa-spin me-1"></i>' +
+    'Checking Employee ID...' +
+    '</span>';
+
+
+    try{
+
+        const response =
+        await fetch(
+            SCRIPT_URL,
+            {
+
+                method:"POST",
+
+                body:
+                JSON.stringify({
+
+                    action:
+                    "checkEmployeeID",
+
+                    employeeID:id
+
+                })
+
+            }
+        );
+
+
+        const result =
+        await response.json();
+
+
+        if(result.status){
+
+            empStatus.innerHTML =
+            '<span class="status-available">' +
+            '<i class="fa-solid fa-circle-check me-1"></i>' +
+            'Employee ID Available' +
+            '</span>';
+
+        }
+
+        else{
+
+            empStatus.innerHTML =
+            '<span class="status-exists">' +
+            '<i class="fa-solid fa-circle-xmark me-1"></i>' +
+            'Employee ID Already Exists' +
+            '</span>';
+
+        }
+
+    }
+
+    catch(error){
+
+        empStatus.innerHTML =
+        '<span class="status-checking">' +
+        '<i class="fa-solid fa-triangle-exclamation me-1"></i>' +
+        'Unable to Check' +
+        '</span>';
+
+    }
+
+}
+
+
+
+/* =========================================================
+   FORM SUBMIT
+========================================================= */
+
+form.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+        saveRegistration();
+
+    }
+);
+
+
+
+/* =========================================================
+   SAVE REGISTRATION
+========================================================= */
+
+async function saveRegistration(){
+
+
+    /* ------------------------------------------------------
+       SCRIPT URL CHECK
+    ------------------------------------------------------ */
+
+    if(
+        SCRIPT_URL.includes(
+            "PASTE_NEW_SCRIPT_URL"
+        )
+    ){
+
+        Swal.fire({
+
+            icon:"error",
+
+            title:"Apps Script URL Missing",
+
+            text:
+            "Please add the new Apps Script Web App URL in index.html."
+
+        });
+
+        return;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       VALIDATIONS
+    ------------------------------------------------------ */
+
+    if(employeeID.value.trim() === ""){
+
+        showValidation(
+            "Employee ID is required."
+        );
+
+        employeeID.focus();
+
+        return;
+
+    }
+
+
+    if(fullName.value.trim() === ""){
+
+        showValidation(
+            "Full Name is required."
+        );
+
+        fullName.focus();
+
+        return;
+
+    }
+
+
+    if(designation.value === ""){
+
+        showValidation(
+            "Please select Designation."
+        );
+
+        designation.focus();
+
+        return;
+
+    }
+
+
+    if(mobile.value.length !== 10){
+
+        showValidation(
+            "Please enter valid 10 digit Mobile Number."
+        );
+
+        mobile.focus();
+
+        return;
+
+    }
+
+
+    if(bloodGroup.value === ""){
+
+        showValidation(
+            "Please select Blood Group."
+        );
+
+        bloodGroup.focus();
+
+        return;
+
+    }
+
+
+    if(!isValidDate(dob.value)){
+
+        showValidation(
+            "Please enter valid Date of Birth in DD-MM-YYYY."
+        );
+
+        dob.focus();
+
+        return;
+
+    }
+
+
+    if(!isValidDate(doj.value)){
+
+        showValidation(
+            "Please enter valid Date of Joining in DD-MM-YYYY."
+        );
+
+        doj.focus();
+
+        return;
+
+    }
+
+
+    if(address.value.trim() === ""){
+
+        showValidation(
+            "Address is required."
+        );
+
+        address.focus();
+
+        return;
+
+    }
+
+
+    if(!isValidDate(retireDate.value)){
+
+        showValidation(
+            "Please enter valid Retire Date in DD-MM-YYYY."
+        );
+
+        retireDate.focus();
+
+        return;
+
+    }
+
+
+    if(photoBase64 === ""){
+
+        Swal.fire({
+
+            icon:"warning",
+
+            title:"Photo Required",
+
+            text:
+            "Please select and crop Teacher Photo."
+
+        });
+
+        return;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       DUPLICATE CHECK AGAIN
+    ------------------------------------------------------ */
+
+    const check =
+    await verifyEmployeeBeforeSave();
+
+
+    if(!check){
+
+        return;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       LOADING
+    ------------------------------------------------------ */
+
+    submitBtn.disabled = true;
+
+
+    submitBtn.innerHTML =
+    '<span class="btn-spinner me-2"></span>' +
+    'Saving Registration...';
+
+
+
+    /* ------------------------------------------------------
+       DATA
+    ------------------------------------------------------ */
+
+    const data = {
+
+        action:
+        "saveTeacher",
+
+        employeeID:
+        employeeID.value.trim(),
+
+        fullName:
+        fullName.value.trim().toUpperCase(),
+
+        designation:
+        designation.value,
+
+        mobile:
+        mobile.value,
+
+        bloodGroup:
+        bloodGroup.value,
+
+        dob:
+        dob.value,
+
+        doj:
+        doj.value,
+
+        address:
+        address.value.trim().toUpperCase(),
+
+        retireDate:
+        retireDate.value,
+
+        photo:
+        photoBase64
+
+    };
+
+
+
+    try{
+
+
+        const response =
+        await fetch(
+            SCRIPT_URL,
+            {
+
+                method:"POST",
+
+                body:
+                JSON.stringify(data)
+
+            }
+        );
+
+
+        const result =
+        await response.json();
+
+
+        if(result.status){
+
+
+            Swal.fire({
+
+                icon:"success",
+
+                title:"Registration Successful",
+
+                html:
+                "<b>Teacher details saved successfully.</b>" +
+                "<br><br>" +
+                "Employee ID: <b>" +
+                escapeHtml(
+                    employeeID.value
+                ) +
+                "</b>",
+
+                confirmButtonColor:
+                "#198754",
+
+                confirmButtonText:
+                "OK"
+
+            });
+
+
+            resetForm();
+
+
+        }
+
+        else{
+
+
+            Swal.fire({
+
+                icon:"error",
+
+                title:"Unable to Save",
+
+                text:
+                result.message ||
+                "Something went wrong.",
+
+                confirmButtonColor:
+                "#dc3545"
+
+            });
+
+        }
+
+
+    }
+
+    catch(error){
+
+
+        Swal.fire({
+
+            icon:"error",
+
+            title:"Network Error",
+
+            text:
+            "Unable to connect with Google Apps Script.",
+
+            confirmButtonColor:
+            "#dc3545"
+
+        });
+
+
+    }
+
+
+    finally{
+
+        submitBtn.disabled =
+        false;
+
+
+        submitBtn.innerHTML =
+        '<i class="fa-solid fa-cloud-arrow-up me-2"></i>' +
+        'Save Registration';
+
+    }
+
+}
+
+
+
+/* =========================================================
+   VERIFY EMPLOYEE BEFORE SAVE
+========================================================= */
+
+async function verifyEmployeeBeforeSave(){
+
+    try{
+
+        const response =
+        await fetch(
+            SCRIPT_URL,
+            {
+
+                method:"POST",
+
+                body:
+                JSON.stringify({
+
+                    action:
+                    "checkEmployeeID",
+
+                    employeeID:
+                    employeeID.value.trim()
+
+                })
+
+            }
+        );
+
+
+        const result =
+        await response.json();
+
+
+        if(!result.status){
+
+            Swal.fire({
+
+                icon:"error",
+
+                title:"Duplicate Employee ID",
+
+                text:
+                "This Employee ID already exists in the Sheet.",
+
+                confirmButtonColor:
+                "#dc3545"
+
+            });
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+    catch(error){
+
+        Swal.fire({
+
+            icon:"error",
+
+            title:"Verification Failed",
+
+            text:
+            "Employee ID could not be verified."
+
+        });
+
+        return false;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   VALIDATION POPUP
+========================================================= */
+
+function showValidation(message){
+
+    Swal.fire({
+
+        icon:"warning",
+
+        title:"Please Check",
+
+        text:message,
+
+        confirmButtonColor:
+        "#0d6efd"
+
+    });
+
+}
+
+
+
+/* =========================================================
+   RESET FORM
+========================================================= */
+
+function resetForm(){
+
+    form.reset();
+
+
+    photoBase64 = "";
+
+
+    previewImage.src = "";
+
+    previewImage.style.display =
+    "none";
+
+
+    photoPlaceholder.style.display =
+    "block";
+
+
+    empStatus.innerHTML =
+    "";
+
+
+    addressCount.textContent =
+    "0";
+
+
+    progressBar.style.width =
+    "0%";
+
+
+    progressText.textContent =
+    "0%";
+
+
+    if(cropper){
+
+        cropper.destroy();
+
+        cropper = null;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+
+</body>
+
+</html>
