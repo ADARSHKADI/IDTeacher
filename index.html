@@ -1366,65 +1366,71 @@ class="employee-status">
 
 </label>
 
+<div class="photo-section">
 
-<input
-    type="file"
-    id="cameraInput"
-    accept="image/*"
-    capture="environment"
-    hidden>
+    <div class="text-center">
 
-<input
-    type="file"
-    id="galleryInput"
-    accept="image/*"
-    hidden>
+        <button
+            type="button"
+            id="photoChooseBtn"
+            class="btn btn-primary btn-lg">
 
-      <button
-    type="button"
-    class="btn btn-primary"
-    id="photoChooseBtn">
+            <i class="fa-solid fa-camera me-2"></i>
+            Choose Teacher Photo
 
-    <i class="fa-solid fa-camera me-2"></i>
-    Choose Teacher Photo
+        </button>
 
-</button>
+        <div class="small text-muted mt-2">
+            Camera અથવા Gallery માંથી Photo પસંદ કરો
+        </div>
 
-<div class="small text-muted mt-2">
-
-    <i class="fa-solid fa-circle-info me-1"></i>
-
-    Photo will be cropped to passport-size format.
-
-</div>
-
-</div>
+    </div>
 
 
+    <!-- CAMERA -->
+    <input
+        type="file"
+        id="cameraInput"
+        accept="image/*"
+        capture="environment"
+        hidden>
 
-<div class="col-md-6">
 
-<div class="photo-preview">
+    <!-- GALLERY -->
+    <input
+        type="file"
+        id="galleryInput"
+        accept="image/*"
+        hidden>
 
-    <img
-        id="previewImage"
-        alt="Teacher Photo Preview">
 
-    <div
-        id="photoPlaceholder"
-        class="photo-placeholder">
+    <div class="photo-preview mt-3">
 
-        <i class="fa-solid fa-image"></i>
+        <img
+            id="previewImage"
+            alt="Teacher Photo Preview">
 
-        <span>
-            Photo Preview
-        </span>
+        <div
+            id="photoPlaceholder"
+            class="photo-placeholder">
+
+            <i class="fa-solid fa-image"></i>
+
+            <span>
+                Photo Preview
+            </span>
+
+        </div>
 
     </div>
 
 </div>
 
+
 </div>
+
+
+
 
 
 </div>
@@ -1828,45 +1834,132 @@ autoDateFormat(retireDate);
    PHOTO SELECT
 ========================================================= */
 
-photoInput.addEventListener(
+const photoChooseBtn =
+    document.getElementById("photoChooseBtn");
+
+const cameraInput =
+    document.getElementById("cameraInput");
+
+const galleryInput =
+    document.getElementById("galleryInput");
+
+
+/* =========================================================
+   CAMERA / GALLERY CHOICE
+========================================================= */
+
+photoChooseBtn.addEventListener(
+    "click",
+    function(){
+
+        Swal.fire({
+
+            title: "Select Photo",
+
+            text: "Photo કેવી રીતે પસંદ કરવી છે?",
+
+            showCancelButton: true,
+
+            showDenyButton: true,
+
+            confirmButtonText:
+                '<i class="fa-solid fa-camera"></i> Camera',
+
+            denyButtonText:
+                '<i class="fa-solid fa-image"></i> Gallery',
+
+            cancelButtonText:
+                "Cancel",
+
+            confirmButtonColor:
+                "#0d6efd",
+
+            denyButtonColor:
+                "#198754"
+
+        }).then(function(result){
+
+            if(result.isConfirmed){
+
+                cameraInput.click();
+
+            }
+
+            else if(result.isDenied){
+
+                galleryInput.click();
+
+            }
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   CAMERA PHOTO
+========================================================= */
+
+cameraInput.addEventListener(
     "change",
-    function(event){
+    function(e){
 
-        const file =
-        event.target.files[0];
+        handleSelectedPhoto(e.target.files[0]);
 
-
-        if(!file){
-
-            return;
-
-        }
+    }
+);
 
 
-        if(!file.type.startsWith("image/")){
+/* =========================================================
+   GALLERY PHOTO
+========================================================= */
 
-            Swal.fire({
+galleryInput.addEventListener(
+    "change",
+    function(e){
 
-                icon:"error",
+        handleSelectedPhoto(e.target.files[0]);
 
-                title:"Invalid File",
-
-                text:"Please select an image file."
-
-            });
-
-            photoInput.value="";
-
-            return;
-
-        }
+    }
+);
 
 
-        const reader =
+/* =========================================================
+   COMMON PHOTO HANDLER
+========================================================= */
+
+function handleSelectedPhoto(file){
+
+    if(!file){
+
+        return;
+
+    }
+
+
+    if(!file.type.startsWith("image/")){
+
+        Swal.fire({
+
+            icon:"error",
+
+            title:"Invalid Photo",
+
+            text:"Please select an image."
+
+        });
+
+        return;
+
+    }
+
+
+    const reader =
         new FileReader();
 
 
-        reader.onload =
+    reader.onload =
         function(e){
 
             document.getElementById(
@@ -1879,11 +1972,9 @@ photoInput.addEventListener(
         };
 
 
-        reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
-    }
-);
-
+}
 
 
 /* =========================================================
